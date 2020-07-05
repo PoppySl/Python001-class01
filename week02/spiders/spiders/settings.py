@@ -52,9 +52,17 @@ ROBOTSTXT_OBEY = True
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
-#DOWNLOADER_MIDDLEWARES = {
-#    'spiders.middlewares.SpidersDownloaderMiddleware': 543,
-#}
+DOWNLOADER_MIDDLEWARES = {
+   'spiders.middlewares.SpidersDownloaderMiddleware': 543,
+   'spiders.middlewares.HttpProxyMiddleware': None,
+   'spiders.middlewares.RandomHttpProxyMiddleware': 400,
+
+}
+
+HTTP_PROXY_LIST = [
+     'http://52.179.231.206:80',
+     'http://95.0.194.241:9090',
+]
 
 # Enable or disable extensions
 # See https://docs.scrapy.org/en/latest/topics/extensions.html
@@ -65,7 +73,7 @@ ROBOTSTXT_OBEY = True
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-   'spiders.pipelines.SpidersPipeline': 300,
+   'spiders.pipelines.MysqlPipeline': 300,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
@@ -88,3 +96,21 @@ ITEM_PIPELINES = {
 #HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+'''MysqlPipeline
+CREATE DATABASE `maoyan` CHARACTER SET 'utf8mb4' COLLATE 'utf8mb4_general_ci';
+USE maoyan;
+CREATE TABLE `movie` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `tag` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `time` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `link` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+'''
+MYSQL_HOST = 'localhost'
+MYSQL_DATABASE = 'maoyan'
+MYSQL_TABLE = 'movie'
+MYSQL_PORT = 3306
+MYSQL_USER = 'root'
+MYSQL_PASSWORD = 'admintest'
