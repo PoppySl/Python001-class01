@@ -9,6 +9,7 @@ class MysqlPipeline:
         self.user = user
         self.password = password
         self.port = port
+        self.db = ''
 
     @classmethod
     def from_crawler(cls, crawler):
@@ -29,7 +30,6 @@ class MysqlPipeline:
             self.database,
             charset='utf8',
             port=self.port)
-        self.cursor = self.db.cursor()
 
     def close_spider(self, spider):
         self.db.close()

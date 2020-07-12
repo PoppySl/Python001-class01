@@ -25,6 +25,5 @@ class MaoyanSpider(scrapy.Spider):
             item['link'] = "htttps://maoyan.com" + link
             item['tag'] = tag
             item['time'] = time
-            # print(item)
             yield item
 
