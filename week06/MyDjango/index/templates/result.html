@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <tr>
+        <th style="background-color:royalblue">id</th>
+        <th style="background-color:royalblue">评论</th>
+        <th style="background-color:royalblue">星级</th>
+    </tr>
+</head>
+<body>
+{% for short in shorts %}
+    {% if short.star_level > 3 %}
+        <tr>
+            <td width="3%" align="center">{{short.id}}</td>
+            <td>{{short.comment}}</td>
+            <td width="3%" align="center" style="background-color:coral">{{short.star_level}}</td>
+        </tr>
+    {% endif %}
+{% endfor %}
+</body>
+</html>
